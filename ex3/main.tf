@@ -1,28 +1,28 @@
-resource "openstack_networking_floatingip_v2" "floating_ip4" {
+resource "openstack_networking_floatingip_v2" "floating_ip" {
     pool     = "Ext-Net"
     region   = "GRA7"
 }
 
-resource "openstack_compute_floatingip_associate_v2" "instance_floating4" {
+resource "openstack_compute_floatingip_associate_v2" "instance_floating" {
   floating_ip = "${openstack_networking_floatingip_v2.floating_ip4.address}"
-  instance_id = "${openstack_compute_instance_v2.test_terraform_instance8.id}"
+  instance_id = "${openstack_compute_instance_v2.test_terraform_instance.id}"
   region = "GRA7"
 }
 
 
 resource "openstack_compute_keypair_v2" "test-keypair" {
-  name   = "my-keypair3"
+  name   = "my-keypair"
   region = "GRA7"
 }
 
 
 
-resource "openstack_compute_instance_v2" "test_terraform_instance8" {
-  name        = "mlelievre_instance8"
+resource "openstack_compute_instance_v2" "test_terraform_instance" {
+  name        = "mlelievre_instance"
   provider    = openstack.ovh
   image_name  = "Ubuntu 22.04"
   flavor_name = "d2-4"
-  key_pair    = "my-keypair3"
+  key_pair    = "my-keypair"
   region      = "GRA7"
 
   
